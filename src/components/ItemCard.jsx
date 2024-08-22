@@ -13,9 +13,11 @@ import {
 import StarIcon from "@mui/icons-material/Star";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-const MovieCard = ({ movie }) => {
-  const value = (movie.vote_average - 7) * 5;
+
+const ItemCard = ({ item }) => {
+  const value = (item.vote_average - 7) * 5;
   const [selectedFav, setSelectedFav] = useState(false);
+  const [favCount, setFavCount] = useState(0);
   const labels = {
     0: "7.0",
     1: "7.2",
@@ -24,6 +26,16 @@ const MovieCard = ({ movie }) => {
     4: "7.8",
     5: "8.0",
   };
+
+  const handleFavoriteClick = () => {
+    if (selectedFav) {
+      setFavCount(favCount - 1);
+    } else {
+      setFavCount(favCount + 1);
+    }
+    setSelectedFav(!selectedFav);
+  };
+
   return (
     <Card
       sx={{
@@ -39,16 +51,16 @@ const MovieCard = ({ movie }) => {
         <CardMedia
           component="img"
           height="300"
-          style={{ objectFit: "cover" }}  // Correct objectFit value
-          image={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-          alt={movie.title}
+          style={{ objectFit: "cover" }} // Correct objectFit value
+          image={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
+          alt={item.title}
         />
 
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {movie.title}
+            {item.name || item.title}
           </Typography>
-         
+
           <div
             style={{
               display: "flex",
@@ -65,30 +77,34 @@ const MovieCard = ({ movie }) => {
                 <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
               }
             />
-            <Box sx={{ ml: 2 }}>{labels[Math.round(value)]}</Box>
+            <Box sx={{ ml: 2 }}>{labels[Math.round(value)] || item.vote_average}</Box>
           </div>
           <Typography variant="body1" color="text.secondary">
-            {movie.release_date}
+            {item.release_date || item.first_air_date}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions sx={{ justifyContent: "space-between", padding: "15px" }}>
-        <Button size="small" color="primary" href={`/movie/${movie.id}`}>
+        <Button size="small" color="primary" href={`/details/${item.id}`}>
           Details
         </Button>
-        {selectedFav ? (
-          <FavoriteIcon
-            onClick={() => setSelectedFav(!selectedFav)}
-            style={{ color: "red" }}
-          />
-        ) : (
-          <FavoriteBorderIcon
-            onClick={() => setSelectedFav(!selectedFav)}
-            style={{ color: "white" }}
-          />
-        )}
+        <div>
+          
+          {selectedFav ? (
+            <FavoriteIcon
+              onClick={handleFavoriteClick}
+              style={{ color: "red", cursor: "pointer" }}
+            />
+          ) : (
+            <FavoriteBorderIcon
+              onClick={handleFavoriteClick}
+              style={{ color: "white", cursor: "pointer" }}
+            />
+          )}
+        </div>
       </CardActions>
     </Card>
   );
 };
-export default MovieCard;
+
+export default ItemCard;

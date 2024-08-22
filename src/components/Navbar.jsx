@@ -1,14 +1,19 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { Link } from "react-router-dom";
 const Navbars = () => {
   return (
     <nav
       className="navbar navbar-expand-lg fixed-top"
-      style={{ backgroundColor: "#121212" ,height: "70px"}}
+      style={{ backgroundColor: "#121212", height: "70px" }}
     >
-      <div className="container-fluid" style={{padding: "50px"}}>
-        <a className="navbar-brand text-white" href="#" style={{marginRight: "50px"}}>
-          Movies
-        </a>
+      <div className="container-fluid" style={{ padding: "50px" }}>
+        <Link
+          to="/"
+          className="nav-link active text-white"
+          style={{ marginRight: "50px", fontSize: "25px", fontWeight: "bold" }}
+        >
+          Movies TV
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -23,54 +28,37 @@ const Navbars = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
             <li className="nav-item">
-              <a
-                className="nav-link active text-white"
-                aria-current="page"
-                href="#"
-              >
-                Movies{" "}
-              </a>
+              <Link to="/" className="nav-link active text-white">
+                Movies
+              </Link>
             </li>
             <li className="nav-item">
-              <a
-                className="nav-link active text-white"
-                aria-current="page"
-                href="#"
-              >
-                Actors{" "}
-              </a>
+              <Link to="/actors" className="nav-link active text-white">
+                Actors
+              </Link>
             </li>
             <li className="nav-item">
-              <a
-                className="nav-link active text-white"
-                aria-current="page"
-                href="#"
-              >
+              <Link to="/series" className="nav-link active text-white">
                 series{" "}
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a
-                className="nav-link active text-white"
-                aria-current="page"
-                href="#"
-              >
+              <Link to="/tvshows" className="nav-link active text-white">
                 Tv Shows{" "}
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-white position-relative" href="#">
-                Favourite{" "}
+              <Link to="/actors" className="nav-link active text-white position-relative">
+                Favourite
                 <span className="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger d-none d-lg-inline">
                   1
                 </span>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-    
   );
 };
 

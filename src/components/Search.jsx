@@ -8,6 +8,7 @@ const search = () => {
           backgroundImage: `url(${image})`,
           opacity: "0.6",
           height: "400px",
+          width: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
