@@ -4,7 +4,6 @@ import {
   Typography,
   Card,
   Button,
-  CardActionArea,
   CardActions,
   Rating,
   Box,
