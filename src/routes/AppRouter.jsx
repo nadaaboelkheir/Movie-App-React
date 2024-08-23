@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { useState } from "react";
 import {
   BrowserRouter as Router,
@@ -6,14 +6,15 @@ import {
   Route,
   Outlet,
 } from "react-router-dom";
-import MoviesPage from "../pages/Movies";
-import SeriesPage from "../pages/Series";
-import TvShowsPage from "../pages/TvShows";
-import Navbars from "../components/Navbar";
-import Details from "../pages/Details";
-import ActorsPage from "../pages/Actors";
 import NotFound from "../pages/NotFound";
-import Favourite from "../pages/Favourite";
+import Navbars from "../components/Navbar";
+import Loading from "../components/loading";
+const MoviesPage = lazy(() => import("../pages/Movies"));
+const SeriesPage = lazy(() => import("../pages/Series"));
+const TvShowsPage = lazy(() => import("../pages/TvShows"));
+const Details = lazy(() => import("../pages/Details"));
+const ActorsPage = lazy(() => import("../pages/Actors"));
+const Favourite = lazy(() => import("../pages/Favourite"));
 
 const AppRouter = () => {
   const [favList, setFavList] = useState([]); // Favorite list
@@ -39,48 +40,50 @@ const AppRouter = () => {
   );
   return (
     <Router>
-      <Routes>
-        <Route element={<LayoutWithNavbar />}>
-          <Route
-            index
-            element={
-              <MoviesPage
-                favList={favList}
-                addFavorite={addFavorite}
-                removeFavorite={removeFavorite}
-                isInFavList={isInFavList}
-              />
-            }
-          />
-          <Route
-            path="details/:id"
-            element={
-              <Details
-                favList={favList}
-                addFavorite={addFavorite}
-                removeFavorite={removeFavorite}
-                isInFavList={isInFavList}
-              />
-            }
-          />
-          <Route path="actors" element={<ActorsPage />} />
-          <Route path="tvshows" element={<TvShowsPage />} />
-          <Route path="series" element={<SeriesPage />} />
-          <Route
-            path="favourite"
-            element={
-              <Favourite
-                favList={favList}
-                addFavorite={addFavorite}
-                removeFavorite={removeFavorite}
-                isInFavList={isInFavList}
-              />
-            }
-          />
-        </Route>
+      <Suspense fallback={<Loading />}>
+        <Routes>
+          <Route element={<LayoutWithNavbar />}>
+            <Route
+              index
+              element={
+                <MoviesPage
+                  favList={favList}
+                  addFavorite={addFavorite}
+                  removeFavorite={removeFavorite}
+                  isInFavList={isInFavList}
+                />
+              }
+            />
+            <Route
+              path="details/:id"
+              element={
+                <Details
+                  favList={favList}
+                  addFavorite={addFavorite}
+                  removeFavorite={removeFavorite}
+                  isInFavList={isInFavList}
+                />
+              }
+            />
+            <Route path="actors" element={<ActorsPage />} />
+            <Route path="tvshows" element={<TvShowsPage />} />
+            <Route path="series" element={<SeriesPage />} />
+            <Route
+              path="favourite"
+              element={
+                <Favourite
+                  favList={favList}
+                  addFavorite={addFavorite}
+                  removeFavorite={removeFavorite}
+                  isInFavList={isInFavList}
+                />
+              }
+            />
+          </Route>
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
     </Router>
   );
 };
