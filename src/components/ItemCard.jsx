@@ -46,7 +46,6 @@ const ItemCard = ({ item ,  type,addFavorite, removeFavorite, isInFavList  }) =>
       }}
     >
       {/* <Link to={`/details/${item.id}`} style={{ textDecoration: "none" }}> */}
-      <CardActionArea>
         <CardMedia
           component="img"
           height="300"
@@ -90,7 +89,6 @@ const ItemCard = ({ item ,  type,addFavorite, removeFavorite, isInFavList  }) =>
             {item.release_date || item.first_air_date}
           </Typography>
         </CardContent>
-      </CardActionArea>
       {/* </Link> */}
       <CardActions sx={{ justifyContent: "space-between", padding: "15px" }}>
       <Link to={`/details/${item.id}`} style={{ textDecoration: "none" }}>
