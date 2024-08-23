@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from "react-router-dom";
-const Navbars = () => {
+const Navbars = ({ favCount }) => {
   return (
     <nav
       className="navbar navbar-expand-lg fixed-top"
       style={{ backgroundColor: "#121212", height: "70px" }}
     >
-      <div className="container-fluid" style={{ padding: "50px" }}>
+      <div className="container-fluid" style={{ paddingLeft: "50px" }}>
         <Link
           to="/"
           className="nav-link active text-white"
@@ -48,11 +48,16 @@ const Navbars = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/actors" className="nav-link active text-white position-relative">
+              <Link
+                to="/favourite"
+                className="nav-link active text-white position-relative"
+              >
                 Favourite
-                <span className="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger d-none d-lg-inline">
-                  1
-                </span>
+                {favCount > 0 && (
+                  <span className="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">
+                    {favCount}
+                  </span>
+                )}
               </Link>
             </li>
           </ul>

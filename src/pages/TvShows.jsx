@@ -6,7 +6,7 @@ const TvShowsPage = () => (
   <GeneralPage
     fetchData={fetchTVShow}
     title="Popular TvShow"
-    renderItem={(show) => <ItemCard item={show} />}
+    renderItem={(show) => <ItemCard item={show} type={"tvshow"} />}
     pageSize={10}
   />
 );

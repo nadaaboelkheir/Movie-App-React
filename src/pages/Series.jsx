@@ -6,7 +6,7 @@ const SeriesPage = () => (
   <GeneralPage
     fetchData={fetchSeries}
     title="Popular Series"
-    renderItem={(series) => <ItemCard item={series} />}
+    renderItem={(series) => <ItemCard item={series} type={"series"} />}
     pageSize={10}
   />
 );

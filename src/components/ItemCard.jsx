@@ -14,10 +14,8 @@ import StarIcon from "@mui/icons-material/Star";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
-const ItemCard = ({ item }) => {
+const ItemCard = ({ item ,  type,addFavorite, removeFavorite, isInFavList  }) => {
   const value = (item.vote_average - 7) * 5;
-  const [selectedFav, setSelectedFav] = useState(false);
-  const [favCount, setFavCount] = useState(0);
   const labels = {
     0: "7.0",
     1: "7.2",
@@ -28,14 +26,12 @@ const ItemCard = ({ item }) => {
   };
 
   const handleFavoriteClick = () => {
-    if (selectedFav) {
-      setFavCount(favCount - 1);
+    if (isInFavList(item.id)) {
+      removeFavorite(item.id);
     } else {
-      setFavCount(favCount + 1);
+      addFavorite(item);
     }
-    setSelectedFav(!selectedFav);
   };
-
   return (
     <Card
       sx={{
@@ -51,8 +47,10 @@ const ItemCard = ({ item }) => {
         <CardMedia
           component="img"
           height="300"
-          style={{ objectFit: "cover" }} // Correct objectFit value
-          image={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
+          style={{ objectFit: "cover" }}
+          image={`https://image.tmdb.org/t/p/w500/${
+            item.poster_path || item.profile_path
+          }`}
           alt={item.title}
         />
 
@@ -68,16 +66,22 @@ const ItemCard = ({ item }) => {
               marginBottom: "10px",
             }}
           >
-            <Rating
-              name="text-feedback"
-              value={value}
-              readOnly
-              precision={0.5}
-              emptyIcon={
-                <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-              }
-            />
-            <Box sx={{ ml: 2 }}>{labels[Math.round(value)] || item.vote_average}</Box>
+            {value ? (
+              <Rating
+                name="text-feedback"
+                value={value}
+                readOnly
+                precision={0.5}
+                emptyIcon={
+                  <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                }
+              />
+            ) : (
+              ""
+            )}
+            <Box sx={{ ml: 2 }}>
+              {labels[Math.round(value)] || item.vote_average}
+            </Box>
           </div>
           <Typography variant="body1" color="text.secondary">
             {item.release_date || item.first_air_date}
@@ -88,20 +92,15 @@ const ItemCard = ({ item }) => {
         <Button size="small" color="primary" href={`/details/${item.id}`}>
           Details
         </Button>
-        <div>
-          
-          {selectedFav ? (
-            <FavoriteIcon
-              onClick={handleFavoriteClick}
-              style={{ color: "red", cursor: "pointer" }}
-            />
-          ) : (
-            <FavoriteBorderIcon
-              onClick={handleFavoriteClick}
-              style={{ color: "white", cursor: "pointer" }}
-            />
-          )}
-        </div>
+        {type === 'movie' && (
+          <div>
+            {isInFavList(item.id) ? (
+              <FavoriteIcon onClick={handleFavoriteClick} style={{ color: "red", cursor: "pointer" }} />
+            ) : (
+              <FavoriteBorderIcon onClick={handleFavoriteClick} style={{ cursor: "pointer" }} />
+            )}
+          </div>
+        )}
       </CardActions>
     </Card>
   );
