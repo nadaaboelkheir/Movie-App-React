@@ -95,7 +95,7 @@ const ItemCard = ({ item ,  type,addFavorite, removeFavorite, isInFavList  }) =>
       <CardActions sx={{ justifyContent: "space-between", padding: "15px" }}>
       <Link to={`/details/${item.id}`} style={{ textDecoration: "none" }}>
 
-        <Button size="small" color="primary" href={`/details/${item.id}`}>
+        <Button size="small" color="primary">
           Details
         </Button>
         </Link>
