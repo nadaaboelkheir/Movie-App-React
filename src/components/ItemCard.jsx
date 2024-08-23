@@ -8,7 +8,10 @@ import {
   CardActions,
   Rating,
   Box,
+  
 } from "@mui/material";
+import { Link } from "react-router-dom";
+
 import StarIcon from "@mui/icons-material/Star";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -42,6 +45,7 @@ const ItemCard = ({ item ,  type,addFavorite, removeFavorite, isInFavList  }) =>
         borderRadius: "20px",
       }}
     >
+      {/* <Link to={`/details/${item.id}`} style={{ textDecoration: "none" }}> */}
       <CardActionArea>
         <CardMedia
           component="img"
@@ -87,10 +91,14 @@ const ItemCard = ({ item ,  type,addFavorite, removeFavorite, isInFavList  }) =>
           </Typography>
         </CardContent>
       </CardActionArea>
+      {/* </Link> */}
       <CardActions sx={{ justifyContent: "space-between", padding: "15px" }}>
+      <Link to={`/details/${item.id}`} style={{ textDecoration: "none" }}>
+
         <Button size="small" color="primary" href={`/details/${item.id}`}>
           Details
         </Button>
+        </Link>
         {type === 'movie' && (
           <div>
             {isInFavList(item.id) ? (
