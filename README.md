@@ -3,7 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and built using modern web development tools including React Router, Bootstrap, Material-UI, lazy loading, React hooks, and Axios for fetching data. Environment variables are handled using a `.env` file.
 
 ## Key Features
-- **Show Movies, TV Shows & Actors**: Browse a list of movies, TV shows, and series, and view detailed information about each one and its cast.
+- **Show Movies, TV Shows & Actors**: Browse a list of movies, TV shows, and series, and view detailed information about each one and its cast - use pagination when get data .
 - **Details for Movies**: See specific details for each movie or show, including cast, synopsis, and release information.
 - **Favorite Movies**: Add movies and TV shows to a favorite list and view them on a dedicated favorites page.
 - **Search Movies**: Search for both movies and TV shows using a search bar and filter the results accordingly.
