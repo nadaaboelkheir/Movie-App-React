@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 const Navbars = ({ favCount }) => {
   return (
     <nav
-      className="navbar navbar-expand-lg fixed-top"
-      style={{ backgroundColor: "#121212", height: "70px" }}
+      className="navbar navbar-expand-lg sticky-top "
+      style={{ backgroundColor: "#121212" }}
     >
       <div className="container-fluid" style={{ paddingLeft: "50px" }}>
         <Link
@@ -25,6 +25,7 @@ const Navbars = ({ favCount }) => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
+
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
             <li className="nav-item">

@@ -28,7 +28,7 @@ const GeneralPage = ({
     <Grid
       container
       spacing={3}
-      sx={{ padding: "100px" }}
+      sx={{ padding: "80px" }}
       justifyContent="center"
     >
       
